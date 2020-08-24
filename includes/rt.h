@@ -12,50 +12,35 @@
 # include <png.h>
 # include "libft.h"
 
-# define MAX_X		500
-# define MAX_Y		500
+# define MAX_X_CAM	500
+# define MAX_Y_CAM	500
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_INTER	42000
 
-
+# define MAX_X_DASH	85
+# define MAX_Y_DASH	130
 
 # define EXIT		65307
-# define ZERO		119
-# define UN		115
-# define DEUX		97
-# define TROIS		100
-# define QUATRE		113
-# define CINQ		101
-# define SIX		65361
-# define SEPT		65363
-# define HUIT		65364
-# define NEUF		65362
-# define DIX		65456
-# define ONZE		32
-# define FAUCON		65505
+# define ZERO		119    // W : rot ↓ PITCH AXIS (assiette ou tangage) 
+# define UN		115    // S : rot ↑ ...
+# define DEUX		97     // A : rot ←  YAW AXIS (lacet)
+# define TROIS		100    // D : rot →  ... 
+# define QUATRE		113    // Q : barrel ←  ROLL AXIS (roulis)
+# define CINQ		101    // E : barrel →  ...
+# define SIX		65361  // ← : left
+# define SEPT		65363  // → : right
+# define HUIT		65364  // ↓ : back
+# define NEUF		65362  // ↑ : forward
+# define DIX		65438  // 0 : down
+# define ONZE		32     // space : up
+# define FAUCON		65505  // shift : speed
 
-/*
-# define EXIT		53
-# define ZERO		13
-# define UN			1
-# define DEUX		0
-# define TROIS		2
-# define QUATRE		12
-# define CINQ		14
-# define SIX		123
-# define SEPT		124
-# define HUIT		125
-# define NEUF		126
-# define DIX		82
-# define ONZE		49
-# define FAUCON		257
-*/
 
-# define PAS		7
+# define PAS		0.4
 # define MILLENIUM	10
-# define ROT		M_PI / 25
+# define ROT		M_PI / 100
 
 typedef struct		s_png
 {
@@ -75,6 +60,8 @@ typedef struct		s_tex
 	float		hori[3];
 }			t_tex;
 
+typedef struct s_obj		t_obj;
+
 typedef struct			s_obj
 {
 	char		*name;
@@ -82,8 +69,12 @@ typedef struct			s_obj
 	float		axe[3];
 	float		rad;
 	float		col[3];
+	float		onde[3]; // (amplitude, fréquence, déphasage)
+	float		xlim[2];
+	float		ylim[2];
+	float		spec;
 	t_tex		*t;
-	struct	s_obj	*next;
+	t_obj		*next;
 }				t_obj;
 
 typedef struct			s_cam
@@ -99,8 +90,8 @@ typedef struct			s_env
 {
 	void		*ptr;
 	void		*win;
-	void		*img;
-	char		*data_img;
+	void		*img[2]; 		// second image for cam dashboard
+	char		*data_img[2];	// ...
 	t_cam		*c;
 	t_obj		*o;
 	char		move[13];
@@ -132,6 +123,7 @@ void	ray_set(t_cam *c, int i);
 void	cam_set(t_env *e);
 void	plan_set(t_env *e, xmlNodePtr noeud);
 void	sphere_set(t_env *e, xmlNodePtr noeud);
+void    ondePlane_set(t_env *e, xmlNodePtr noeud);
 
 //textures
 t_tex		*load_png(char *path);
@@ -143,6 +135,7 @@ void 		print_png_file(t_tex *t);
 void			inter(t_env *e);
 void			plan_inter(t_env *e);
 void			sphere_inter(t_env *e);
+void			ondePlane_inter(t_env *e);
 
 //pixel
 
@@ -151,6 +144,8 @@ void	rt(t_env *e);
 //mlx_stuff
 
 t_env	*env_init(char *path);
+void init_dash(t_env *e);
+void update_dash(t_env *e);
 int	expose(t_env *e);
 int	key_press(int keycode, t_env *e);
 int	key(int keycode, t_env *e);

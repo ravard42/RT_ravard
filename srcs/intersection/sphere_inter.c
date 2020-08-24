@@ -36,6 +36,16 @@ static float	solve(float *param)
 	return (sol);
 }
 
+/*
+** rappel : e->c->ray est le vecteur directeur du rayon
+**
+** idée :
+** soit k une variable réelle
+** on fait varier k et on regarde si le point 
+** M = e->c->ori + k * e->c->ray appartient à notre surface.
+** i-e si ses coordonnées verifient l'équation de la sphere dans le cas présent.
+*/
+
 void				sphere_inter(t_env *e)
 {
 	float	param[3];

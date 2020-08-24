@@ -1,78 +1,75 @@
 CC = gcc
+#FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -fsanitize=address -g
 FLAGS = -Wall -Wextra -O2
+
 NAME = libft.a
-SRC =	v_abs_diff.c\
-	ft_rm_whitespace.c\
-	ft_rm_space_at_the_beginning.c\
-	ft_revstr.c\
-	ft_rm_multi_space.c\
-	ft_power.c\
-	ft_memset.c\
-	ft_bzero.c\
-	ft_memcpy.c\
-	ft_memccpy.c\
-	ft_memmove.c\
-	ft_memchr.c\
-	ft_memcmp.c\
-	ft_strlen.c\
-	ft_strdup.c\
-	ft_strcpy.c\
-	ft_strncpy.c\
-	ft_strcat.c\
-	ft_strncat.c\
-	ft_strlcat.c\
-	ft_strchr.c\
-	ft_strrchr.c\
-	ft_strstr.c\
-	ft_strnstr.c\
-	ft_strcmp.c\
-	ft_strncmp.c\
-	ft_atoi.c\
-	ft_atof.c\
-	ft_isalpha.c\
-	ft_isdigit.c\
-	ft_isxdigit.c\
-	ft_isalnum.c\
-	ft_isascii.c\
-	ft_isprint.c\
-	ft_toupper.c\
-	ft_tolower.c\
-	ft_memalloc.c\
-	ft_memdel.c\
-	ft_strnew.c\
-	ft_strdel.c\
-	ft_strclr.c\
-	ft_striter.c\
-	ft_striteri.c\
-	ft_strmap.c\
-	ft_strmapi.c\
-	ft_strequ.c\
-	ft_strnequ.c\
-	ft_strsub.c\
-	ft_strjoin.c\
-	ft_strsplit.c\
-	ft_strsplit_list.c\
-	ft_itoa.c\
-	ft_strtrim.c\
-	ft_putchar.c\
-	ft_putstr.c\
-	ft_putendl.c\
-	ft_putnbr.c\
-	ft_putchar_fd.c\
-	ft_putstr_fd.c\
-	ft_putendl_fd.c\
-	ft_putnbr_fd.c\
-	ft_lstnew.c\
-	ft_lstdelone.c\
-	ft_lstdel.c\
-	ft_lstadd.c\
-	ft_lstiter.c\
-	ft_lstmap.c\
-	get_next_line.c\
+SRC =	src/ft_memalloc.c\
+		src/ft_memset.c\
+		src/ft_memcpy.c\
+		src/ft_memshift.c\
+		src/ft_memrev.c\
+		src/ft_memcmp.c\
+		src/ft_putchar.c\
+		src/ft_puthex.c\
+		src/ft_hexdump.c\
+		src/ft_putstr.c\
+		src/ft_strlen.c\
+		src/ft_strcpy.c\
+		src/ft_strncpy.c\
+		src/ft_strcat.c\
+		src/ft_strchr.c\
+		src/ft_strcmp.c\
+		src/ft_strncmp.c\
+		src/ft_revstr.c\
+		src/ft_strdup.c\
+		src/ft_strsplit.c\
+		src/ft_itoa.c\
+		src/ft_atoi.c\
+		src/ft_atof.c\
+		src/ft_is_decimal.c\
+		src/hstr_to_64_t.c\
+		src/malloc_free_tools.c\
+		src/rm_begin_whitespace.c\
+		src/rm_multi_whitespace.c\
+		src/get_next_line.c\
+		src/ft_rand.c\
+		src/ft_read.c\
+		src/t_read_tools.c\
+		src/ft_printf/ft_printf.c\
+		src/ft_printf/ft_sprintf.c\
+		src/ft_printf/ft_dprintf.c\
+		src/ft_printf/extract_specifier.c\
+		src/ft_printf/conv.c\
+		src/ft_printf/c_conv.c\
+		src/ft_printf/s_conv.c\
+		src/ft_printf/d_conv.c\
+		src/ft_printf/oux_conv.c\
+		src/ft_printf/bin_conv.c\
+		src/ft_printf/undefined_conv.c\
+		src/ft_printf/tools.c\
+		src/ft_printf/write.c\
+		src/ft_printf/put_buffer.c\
+		src/ft_printf/malloc.c\
+		src/ft_printf/utf_32_to_8.c\
+		src/bswap.c\
+		src/varint/g_v_sterr.c\
+		src/varint/v_tools.c\
+		src/varint/v_tools_2.c\
+		src/varint/v_check.c\
+		src/varint/v_cmp.c\
+		src/varint/v_shift.c\
+		src/varint/v_add_sub.c\
+		src/varint/v_mul_exp.c\
+		src/varint/v_div_mod.c\
+		src/varint/v_expmod.c\
+		src/varint/v_gcd_eea_inv.c\
+		src/varint/v_asn1_int_seq_der_e.c\
+		src/varint/v_asn1_int_seq_der_d.c\
+
 
 OBJ = $(SRC:.c=.o)
-INCLUDE = ../includes
-
+INCLUDE = ./include/
 
 all: $(NAME)
 

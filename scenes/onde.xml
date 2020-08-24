@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<scene>
+	<cam ori="{30,-30,40}" axe="{-0.3,0.7,-0.5}"></cam>
+	<sphere ori="{0,0,0}" rad="0.1" col="{255,255,255}"></sphere>
+	<sphere ori="{3,0,0}" rad="0.1" col="{255,0,0}"></sphere>
+	<sphere ori="{0,3,0}" rad="0.1" col="{0,255,0}"></sphere>
+	<sphere ori="{0,0,3}" rad="0.1" col="{0,0,255}"></sphere>
+	<ondePlane ori="{0,0,0}" col="{0,255,255}" onde="{1,1,0}" xlim="{0,30}" ylim="{0,30}" spec="{42}"></ondePlane>
+</scene>

@@ -33,7 +33,9 @@ int	expose(t_env *e)
 {
 	cam_set(e);
 	rt(e);
-	mlx_put_image_to_window(e->ptr, e->win, e->img, 0, 0);
+	mlx_put_image_to_window(e->ptr, e->win, e->img[0], 0, 0);
+	mlx_put_image_to_window(e->ptr, e->win, e->img[1], MAX_X_CAM - MAX_X_DASH, 0);
+	update_dash(e);
 	return (1);
 }
 
@@ -41,6 +43,7 @@ int	key_press(int keycode, t_env *e)
 {
 	int	tmp;
 
+//	printf("keycode = %d\n", keycode);
 	if (keycode == EXIT)
 		exit(0);
 	else if ((tmp = key_switch(keycode)) != -42)
