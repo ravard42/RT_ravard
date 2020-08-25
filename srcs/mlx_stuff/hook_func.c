@@ -33,6 +33,7 @@ int	expose(t_env *e)
 {
 	cam_set(e);
 	rt(e);
+//	exit(0);
 	mlx_put_image_to_window(e->ptr, e->win, e->img[0], 0, 0);
 	mlx_put_image_to_window(e->ptr, e->win, e->img[1], MAX_X_CAM - MAX_X_DASH, 0);
 	update_dash(e);

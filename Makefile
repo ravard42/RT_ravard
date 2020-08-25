@@ -11,11 +11,13 @@ SRC = srcs/main.c\
 	srcs/init/parsing/setting/plan_set.c\
 	srcs/init/parsing/setting/sphere_set.c\
 	srcs/init/parsing/setting/ondePlane_set.c\
+	srcs/init/parsing/setting/biOndePlane_set.c\
 	srcs/texture/load_png.c\
 	srcs/intersection/inter.c\
 	srcs/intersection/plan_inter.c\
 	srcs/intersection/sphere_inter.c\
 	srcs/intersection/ondePlane_inter.c\
+	srcs/intersection/biOndePlane_inter.c\
 	srcs/render/rt.c\
 	srcs/render/dashboard.c\
 	srcs/mlx_stuff/hook_func.c\
@@ -28,7 +30,7 @@ SRC = srcs/main.c\
 OBJ = $(SRC:.c=.o)
 
 INCL = -I ./ -I libft/include -I includes 
-LIB = -lm -L libft -lft -lxml2  -lpng -L ./ -lmlx -lX11 -lXext
+LIB = -lm -L libft -lft -lxml2  -lpng -L ./ -lmlx -lX11 -lXext -lpthread
 
 #INCL = -I includes/ -I /usr/local/include
 #LIB = -L libft/ -lft -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit

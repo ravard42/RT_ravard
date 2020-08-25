@@ -21,10 +21,10 @@ static void		update_cam_pos(int offset, t_env *e)
 
 	for (int i = 0; i < 3; ++i)
 	{
-		sign = e->c->ori[i] >= 0 ? 1 : -1; 
-		flr = sign * floor(e->c->ori[i] * sign);
+		sign = e->c.ori[i] >= 0 ? 1 : -1; 
+		flr = sign * floor(e->c.ori[i] * sign);
 		tmp[0] = ft_itoa((int)flr);
-		tmp[1] = ft_itoa((int)((e->c->ori[i] - flr) * sign * 10));
+		tmp[1] = ft_itoa((int)((e->c.ori[i] - flr) * sign * 10));
 		ft_memset(out, 0, 20);
 		
 		if (!ft_strcmp(tmp[0], "0") && sign == -1)
@@ -47,10 +47,10 @@ static void		update_cam_dir(int offset, t_env *e)
 
 	for (int i = 0; i < 3; ++i)
 	{
-		sign = e->c->base[2][i] >= 0 ? 1 : -1; 
-		flr = sign * floor(e->c->base[2][i] * sign);
+		sign = e->c.base[2][i] >= 0 ? 1 : -1; 
+		flr = sign * floor(e->c.base[2][i] * sign);
 		tmp[0] = ft_itoa((int)flr);
-		tmp[1] = ft_itoa((int)((e->c->base[2][i] - flr) * sign * 10));
+		tmp[1] = ft_itoa((int)((e->c.base[2][i] - flr) * sign * 10));
 		ft_memset(out, 0, 20);
 	
 		if (!ft_strcmp(tmp[0], "0") && sign == -1)

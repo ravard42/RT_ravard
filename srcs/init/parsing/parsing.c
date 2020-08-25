@@ -25,6 +25,8 @@ void	parse(t_env *e, char *path)
 			sphere_set(e, noeud);
 		else if (!ft_strcmp((const char *)noeud->name, "ondePlane"))
 			ondePlane_set(e, noeud);
+		else if (!ft_strcmp((const char *)noeud->name, "biOndePlane"))
+			biOndePlane_set(e, noeud);
 		noeud = noeud->next;
 	}
 	xmlFreeDoc(doc);

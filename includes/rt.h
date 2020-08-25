@@ -7,9 +7,10 @@
 # include <math.h>
 # include <stdlib.h>
 # include <mlx.h>
-#include <libxml/tree.h>
-#include <libxml/parser.h>
+# include <libxml/tree.h>
+# include <libxml/parser.h>
 # include <png.h>
+# include <pthread.h>
 # include "libft.h"
 
 # define MAX_X_CAM	500
@@ -18,6 +19,7 @@
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_INTER	42000
+# define NB_THREAD		4
 
 # define MAX_X_DASH	85
 # define MAX_Y_DASH	130
@@ -70,6 +72,7 @@ typedef struct			s_obj
 	float		rad;
 	float		col[3];
 	float		onde[3]; // (amplitude, fréquence, déphasage)
+	char		dir;
 	float		xlim[2];
 	float		ylim[2];
 	float		spec;
@@ -86,16 +89,18 @@ typedef struct			s_cam
 	t_obj		*obj;
 }				t_cam;
 
+
 typedef struct			s_env
 {
 	void		*ptr;
 	void		*win;
 	void		*img[2]; 		// second image for cam dashboard
 	char		*data_img[2];	// ...
-	t_cam		*c;
+	t_cam		c;
 	t_obj		*o;
 	char		move[13];
 }				t_env;
+
 
 void	ft_error(char *str, char *file_name);
 
@@ -124,6 +129,7 @@ void	cam_set(t_env *e);
 void	plan_set(t_env *e, xmlNodePtr noeud);
 void	sphere_set(t_env *e, xmlNodePtr noeud);
 void    ondePlane_set(t_env *e, xmlNodePtr noeud);
+void    biOndePlane_set(t_env *e, xmlNodePtr noeud);
 
 //textures
 t_tex		*load_png(char *path);
@@ -136,6 +142,7 @@ void			inter(t_env *e);
 void			plan_inter(t_env *e);
 void			sphere_inter(t_env *e);
 void			ondePlane_inter(t_env *e);
+void			biOndePlane_inter(t_env *e);
 
 //pixel
 

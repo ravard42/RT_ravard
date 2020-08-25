@@ -12,8 +12,9 @@ void			inter(t_env *e)
 		else if (!ft_strcmp("sphere", e->o->name))
 			sphere_inter(e);
 		else if (!ft_strcmp("ondePlane", e->o->name))
-
 			ondePlane_inter(e);
+		else if (!ft_strcmp("biOndePlane", e->o->name))
+			biOndePlane_inter(e);
 		e->o = e->o->next;
 	}
 	e->o = begin;

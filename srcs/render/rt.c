@@ -3,8 +3,8 @@
 static	void clear_cam_pix(t_env *e, int i)
 {
 	*((int *)e->data_img[0] + i) = 0;
-	e->c->inter = MAX_INTER;
-	e->c->obj = NULL;
+	e->c.inter = MAX_INTER;
+	e->c.obj = NULL;
 }
 
 static int	rgb_to_hexa(float *rgb)
@@ -12,18 +12,66 @@ static int	rgb_to_hexa(float *rgb)
 	return (((int)rgb[0] << 16) + ((int)rgb[1] << 8) + (int)rgb[2]);
 }
 
-void	rt(t_env *e)
+typedef struct		s_data_th
 {
-	int	i;
+	uint8_t			id;
+	int				n;
+	t_env			e;
+}					t_data_th;
 
-	i = -1;
-	while (++i < MAX_X_CAM * MAX_Y_CAM)
+
+void	*render_chunk(void *arg)
+{
+	t_env		*e;
+	int			id;
+	int			chunk_len;
+	int			i;
+
+	e = &((t_data_th *)arg)->e;
+	id = ((t_data_th *)arg)->id;
+	chunk_len = ((t_data_th *)arg)->n;
+	i = id * chunk_len;
+	while (i < (id + 1) * chunk_len)
 	{
 		clear_cam_pix(e, i);
-		ray_set(e->c, i);
+		ray_set(&e->c, i);
 		inter(e);
-		if (e->c->obj)
+		if (e->c.obj)
 			*((int *)e->data_img[0] + i) =
-				rgb_to_hexa(e->c->obj->col);
+				rgb_to_hexa(e->c.obj->col);
+		++i;
 	}
+	return (NULL);
 }
+
+
+static void		write_chunck(t_env *dst, t_env *src, uint8_t id, int n)
+{
+	int		i;
+
+	for (i = id * n; i < (id + 1) * n; ++i)
+		*((int *)dst->data_img[0] + i) = *((int *)src->data_img[0] + i);
+}
+
+void	rt(t_env *e)
+{
+	int			chunk_len;
+	int			i;
+	pthread_t   th[NB_THREAD];
+	t_data_th	data[NB_THREAD];
+
+	chunk_len = MAX_X_CAM * MAX_Y_CAM / NB_THREAD;
+	for(i=0; i < NB_THREAD; i++)
+	{
+		data[i].id = i;
+		data[i].n = chunk_len;
+		ft_memcpy(&data[i].e, e, sizeof(*e));
+		pthread_create(th + i, NULL, render_chunk, data + i);
+	}
+	i = -1;
+	while (++i < NB_THREAD)
+		pthread_join(th[i], NULL);
+	i = -1;
+	while (++i < NB_THREAD)
+		write_chunck(e, &data[i].e, i, chunk_len);
+}	
