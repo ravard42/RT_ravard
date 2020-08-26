@@ -19,11 +19,6 @@ static void	load_wave(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"ylim");
 	load_vect(e->o->ylim, (char *)attr);
 	xmlFree(attr);
-	attr = xmlGetProp(noeud, (const xmlChar *)"spec");
-	load_vect(&e->o->spec, (char *)attr);
-	xmlFree(attr);
-	attr = xmlGetProp(noeud, (const xmlChar *)"dir");
-	e->o->dir = ((char *)attr)[0];
 }
 
 void	wave_parser(t_env *e, xmlNodePtr noeud)
@@ -44,6 +39,7 @@ void	wave_parser(t_env *e, xmlNodePtr noeud)
 		e->o = e->o->next;
 	}
 	e->o->name = "wave";
+	e->o->spot = 0;
 	load_wave(e, noeud);
 	e->o->next = NULL;
 	e->o = begin;

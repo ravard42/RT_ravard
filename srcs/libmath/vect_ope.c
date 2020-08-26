@@ -24,6 +24,10 @@ float	*vect_multi(float *multi, float k, float *u)
 	return (multi);
 }
 
+/*
+** *prod must be different of *u and *v inputs here
+*/
+
 float	*vect_prod(float *prod, float *u, float *v)
 {
 	prod[0] = u[1] * v[2] - u[2] * v[1];

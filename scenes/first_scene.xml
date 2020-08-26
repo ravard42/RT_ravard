@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<scene>
+<scene ambiente = "0.5">
 	<cam ori="{-500,-500,2000}" axe="{1,1,0}"></cam>
-	<plan ori="{0,0,0}" axe="{0,0,1}" col="{0,204,153}"></plan>
+	<plan ori="{0,0,0}" axe="{0,0,1}" col="{0,204,153}" ></plan>
 	<plan ori="{0,0,4000}" axe="{0,0,1}" col="{255,0,204}"></plan>
 	<plan ori="{2000,0,0}" axe="{-1,0,0}" col="{255,51,0}"></plan>
 	<plan ori="{-2000,0,0}" axe="{1,0,0}" col="{255,51,0}"></plan>

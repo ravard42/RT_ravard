@@ -13,6 +13,10 @@ static void	load_sphere(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"col");
 	load_vect(e->o->col, (char *)attr);
 	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"spot");
+	e->o->spot = attr ? 1 : 0;	
+	xmlFree(attr);
+	
 	
 }
 

@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<scene>
+<scene ambiente="{0.3}">
 	<cam ori="{12,-30,20}" axe="{0,1,-0.5}"></cam>
+	<sphere ori="{5,5,5}" rad="0.5" col="{255,255,0}" spot=""></sphere>
+	<light ori="{5,5,5}"></light>
+	<wave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,30}" ylim="{0,30}"></wave>
 	<sphere ori="{0,0,0}" rad="0.1" col="{255,255,255}"></sphere>
 	<sphere ori="{1,0,0}" rad="0.1" col="{255,0,0}"></sphere>
 	<sphere ori="{0,1,0}" rad="0.1" col="{0,255,0}"></sphere>
 	<sphere ori="{0,0,1}" rad="0.1" col="{0,0,255}"></sphere>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,15}" ylim="{0,15}" spec="{42}"></biwave>
 </scene>
 
 
 <!--
+	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,15}" ylim="{0,15}"></biwave>
+	<plan ori="{0,0,-1}" axe="{0,0,1}" col="{255,0,255}" xlim="{0,10}" ylim="{0,10}"></plan>
 	<plan ori="{1,1,0.62}" axe="{0.49,0.49,0.41}" col="{255,0,255}" xlim="{0,10}" ylim="{0,10}"></plan>
-	<wave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,30}" ylim="{0,30}" dir="X" spec="{42}"></wave>
-	<wave ori="{0,0,0}" col="{255,0,255}" onde="{1,0.2,0}" xlim="{0,30}" ylim="{0,30}" dir="Y" spec="{42}"></wave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,20}" ylim="{0,20}" spec="{42}"></biwave>
 -->

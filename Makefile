@@ -7,6 +7,7 @@ SRC = srcs/main.c\
 	srcs/init_parse/parsing.c\
 	srcs/init_parse/tools.c\
 	srcs/init_parse/obj_parser/cam_parser.c\
+	srcs/init_parse/obj_parser/light_parser.c\
 	srcs/init_parse/obj_parser/plan_parser.c\
 	srcs/init_parse/obj_parser/sphere_parser.c\
 	srcs/init_parse/obj_parser/wave_parser.c\
@@ -25,6 +26,7 @@ SRC = srcs/main.c\
 	srcs/libmath/mat_ope.c\
 	srcs/libmath/vect_ope.c\
 	srcs/libmath/vect_tools.c\
+	srcs/libmath/normal.c\
 	
 
 OBJ = $(SRC:.c=.o)

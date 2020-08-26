@@ -17,15 +17,15 @@
 **	2)en majuscule quand plusieurs dimensions
 **	3)avec un prefix v pour les vecteurs 
 **	
-**	a=e->o->onde[0] l'amplitude de l'ondePlane
-**	ω=2πf ou f=e->o->onde[1], la fréquence de l'ondePlane
-**	φ=e->o->onde[2], le déphasage de l'ondePlane
+**	a=e->o->onde[0] l'amplitude de l'onde
+**	ω=2πf ou f=e->o->onde[1], la fréquence de l'onde
+**	φ=e->o->onde[2], le déphasage de l'onde
 **	C(cx, cy, cz)=e->c.cam l'origine de la cam
 **	vX(1,0,0), vY(0,1,0) et vZ(0, 0, 1) les vecteurs du repère
 **	vR(rx, ry, rz)=e->c.ray le rayon considéré
 **
-**	IMPORTANT : on a choisit de representer uniquement des ondePlane centrées en z=0
-**				et orientées suivant vX ou vY
+**	IMPORTANT : on a choisit de representer uniquement des 'wave' (onde plane) centrées en z=0
+**				et orientées suivant vX
 **
 **	idée:
 **	a] visualiser l'onde plane prise en sandwich entre 2 plans d'équations z=+A et z=-A
@@ -37,7 +37,7 @@
 **		or par la formule du produit scalaire vR.(-vZ) = |vR||vZ|cos(θ) = rx*0 + ry*0 - rz*1
 **		vR et vZ étant normé on obtient cos(θ)=-rz*z
 **		d'où k_0 = a-cz/rz
-**	d] posons à présent l'équation (E) paramétrique de notre ondePlane
+**	d] posons à présent l'équation (E) paramétrique de notre wave
 **		
 **		(E)
 **		soit (u,v) dans R
@@ -51,19 +51,19 @@
 **	e] ce qui nous interesse est de savoir si l'on peut trouver un point M sur notre rayon qui vérifie (E)
 **		On cherche donc k tel que C + k * vR = M(xm, ym, zm)
 **
-**		dans un premier temps nous allons considérer que l'ondePlane s'étant à l'infini en x et y,
-**		chercher la plus petite solution (qui existe <= COND_0) puis l'on reviendra à xlim et ylim ensuite.
-**		puisque l'ondePlane est maintenant infini is suffit de chercher la solution en x et z (aucune contrainte sur y)
-**		en mettant M dans (E) on obtient donc cz + k*rz = a*cos(ω*(cx + k*rx) + φ)
-**		on pose maintenant g(k) = k*rz - a*cos(ω*(cx + k*rx) + φ) + cz
-**		le problème se réduit à résoudre g(k) = 0
-**		en faisant un changement de variable on voit que l'équation  est de la forme cos(x) = ax + b
+**		Dans un premier temps nous allons considérer que l'onde s'étend à l'infini en x et y
+**		On cherche alors la plus petite solution (qui existe si COND_0) puis l'on reviendra à xlim et ylim ensuite.
+**		Puisque l'onde est maintenant infini il suffit de chercher la solution en x et z (aucune contrainte sur y)
+**		En mettant M dans (E) on obtient donc cz + k*rz = a*cos(ω*(cx + k*rx) + φ)
+**		On pose maintenant g(k) = k*rz - a*cos(ω*(cx + k*rx) + φ) + cz
+**		Le problème se réduit à résoudre g(k) = 0
+**		En faisant un changement de variable on voit que l'équation  est de la forme cos(x) = ax + b
 **		Ce type d'équation n'admettant pas de solution algébrique, on va y aller par tatonnement.
 **		
-**		on sait que g(k_0 - 0.01) n'est pas une solution puisqu'au dessus du plan tangent supérieur
-**		on redéfinit k_0 : k_0 = a-cz/rz - 0.01
-**		tant que |g(k_i)| ne passe pas sous la valeur de TOL on calcule g(k_i+1) où k_i+1 = k_i + DK
-**		cela a du sens de par la continuité de g!
+**		On sait que g(k_0 - 0.01) n'est pas une solution puisqu'au dessus du plan tangent supérieur
+**		On redéfinit k_0 : k_0 = a-cz/rz - 0.01
+**		Tant que |g(k_i)| ne passe pas sous la valeur de TOL on calcule g(k_i+1) où k_i+1 = k_i + DK
+**		Cela a du sens de par la continuité de g!
 **		Une fois qu'on a une solution approximative on calcule les coordonnées de M=C + k * vR
 **		et on voit si cette solution est acceptable relativement à xlim et ylim.
 **		Si oui c'est fini sinon pas de solution
@@ -84,9 +84,9 @@ static float		g(float k, float *param)
 **	0 : a
 **	1 : ω
 **	2 : φ
-**	3 : cx | xy
+**	3 : cx
 **	4 : cz
-**	5 : rx | ry
+**	5 : rx
 **	6 : rz
 */
 
@@ -106,9 +106,9 @@ void				wave_inter(t_env *e)
 		param[0] = e->o->onde[0];
 		param[1] = 2 * M_PI * e->o->onde[1];
 		param[2] = e->o->onde[2];
-		param[3] = e->o->dir == 'X' ? e->c.ori[0] : e->c.ori[1];
+		param[3] = e->c.ori[0];
 		param[4] = e->c.ori[2];
-		param[5] = e->o->dir == 'X' ? e->c.ray[0] : e->c.ray[1];
+		param[5] = e->c.ray[0];
 		param[6] = e->c.ray[2];
 		while (fabs(g(k, param)) > TOL && ++i < ITER_MAX)
 			k += DK;

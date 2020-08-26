@@ -26,7 +26,7 @@
 
 # define EXIT		65307
 # define ZERO		119    // W : rot ↓ PITCH AXIS (assiette ou tangage) 
-# define UN		115    // S : rot ↑ ...
+# define UN			115    // S : rot ↑ ...
 # define DEUX		97     // A : rot ←  YAW AXIS (lacet)
 # define TROIS		100    // D : rot →  ... 
 # define QUATRE		113    // Q : barrel ←  ROLL AXIS (roulis)
@@ -42,121 +42,143 @@
 
 # define PAS		0.4
 # define MILLENIUM	10
-# define ROT		M_PI / 100
+# define ROT		M_PI / 60
 
-typedef struct		s_png
+typedef struct s_env	t_env;
+typedef struct s_obj	t_obj;
+typedef struct s_light	t_light;
+
+typedef struct			s_png
 {
-	int		width;
-	int		height;
-	unsigned char	color_type;
-	unsigned char	bit_depth;
-	unsigned char	**row_pointers;
-}			t_png;
+	int					width;
+	int					height;
+	unsigned char		color_type;
+	unsigned char		bit_depth;
+	unsigned char		**row_pointers;
+}						t_png;
 
-typedef struct		s_tex
+typedef struct			s_tex
 {
-	int		width;
-	int		height;
-	int		*data_t;
-	float		ori[3];
-	float		hori[3];
-}			t_tex;
-
-typedef struct s_obj		t_obj;
-
-typedef struct			s_obj
-{
-	char		*name;
-	float		ori[3];
-	float		axe[3];
-	float		rad;
-	float		col[3];
-	float		onde[3]; // (amplitude, fréquence, déphasage)
-	char		dir;
-	float		xlim[2];
-	float		ylim[2];
-	float		spec;
-	t_tex		*t;
-	t_obj		*next;
-}				t_obj;
+	int					width;
+	int					height;
+	int					*data_t;
+	float				ori[3];
+	float				hori[3];
+}						t_tex;
 
 typedef struct			s_cam
 {
-	float		ori[3];
-	float		**base;
-	float		ray[3];
-	float		inter;
-	t_obj		*obj;
-}				t_cam;
+	float				ori[3];
+	float				**base;
+	float				ray[3];	// current ray
+	t_obj				*obj;	// nearest object hit by ray
+	float				inter;	// distance with hit
+	float				m[3];	// current intersection point 
+}						t_cam;
+
+typedef struct			s_light
+{
+	float				ori[3];
+	float				ray[3]; // normalize vector from light to current intersection point
+}						t_light;
+
+
+typedef struct			s_normal
+{
+	char				*prim_name;
+	float				*(*prim_normal)(float *, t_env *);
+}						t_normal;
+
+extern t_normal			normal[];
+
+typedef struct			s_obj
+{
+	char				*name;
+	float				ori[3];
+	float				axe[3];
+	float				nor[3]; //normal for Phong lighting model (ambiente, diffuse, specular)
+	float				rad;
+	float				col[3];
+	float				onde[3]; // (amplitude, fréquence, déphasage)
+	float				xlim[2];
+	float				ylim[2];
+	t_tex				*t;
+	bool				spot;
+	t_obj				*next;
+}						t_obj;
+
 
 
 typedef struct			s_env
 {
-	void		*ptr;
-	void		*win;
-	void		*img[2]; 		// second image for cam dashboard
-	char		*data_img[2];	// ...
-	t_cam		c;
-	t_obj		*o;
-	char		move[13];
-}				t_env;
+	void				*ptr;
+	void				*win;
+	void				*img[2]; 		// second image for cam dashboard
+	char				*data_img[2];	// ...
+	float				amb;
+	t_cam				c;
+	t_light				l;
+	t_obj				*o;
+	char				move[13];
+}						t_env;
 
 
-void	ft_error(char *str, char *file_name);
+void					ft_error(char *str, char *file_name);
 
 // vect_and_mat
-float	*vect_sum(float *sum, float *u, float *v);
-float	*vect_sub(float *sub, float *u, float *v);
-float	*vect_multi(float *multi, float k, float *u);
-float	*vect_prod(float *prod, float *u, float *v);
-float	dot_prod(float *u, float *v);
-float	*vect_set(float *dst, float a, float b, float c);
-float	*vect_copy(float *dst, float *src);
-float	ft_dist(float *a, float *b);
-float	*ft_norme(float *v);
-float	*mat_prod(float *mp, float **mat, float *src);
-int	rot(float *ez, float value, float *n);
-float	**inverse(float **mat);
+float					*vect_sum(float *sum, float *u, float *v);
+float					*vect_sub(float *sub, float *u, float *v);
+float					*vect_multi(float *multi, float k, float *u);
+float					*vect_prod(float *prod, float *u, float *v);
+float					dot_prod(float *u, float *v);
+float					*vect_set(float *dst, float a, float b, float c);
+float					*vect_copy(float *dst, float *src);
+float					ft_dist(float *a, float *b);
+float					*ft_norme(float *v);
+float					*mat_prod(float *mp, float **mat, float *src);
+int						rot(float *ez, float value, float *n);
+float					**inverse(float **mat);
 
 //init_parse
-void 	init_dash(t_env *e);
-void	parse(t_env *e, char *path);
-float	*load_vect(float *a, char *s);
+void 					init_dash(t_env *e);
+void					parse(t_env *e, char *path);
+float					*load_vect(float *a, char *s);
 
 //obj_parser
-void	cam_parser(t_env *e, xmlNodePtr noeud);
-void	plan_parser(t_env *e, xmlNodePtr noeud);
-void	sphere_parser(t_env *e, xmlNodePtr noeud);
-void    wave_parser(t_env *e, xmlNodePtr noeud);
-void    biwave_parser(t_env *e, xmlNodePtr noeud);
+void					cam_parser(t_env *e, xmlNodePtr noeud);
+void					light_parser(t_env *e, xmlNodePtr noeud);
+void					plan_parser(t_env *e, xmlNodePtr noeud);
+void					sphere_parser(t_env *e, xmlNodePtr noeud);
+void				    wave_parser(t_env *e, xmlNodePtr noeud);
+void				    biwave_parser(t_env *e, xmlNodePtr noeud);
 
 //textures
-t_tex		*load_png(char *path);
-void 		print_png_file(t_tex *t);
+t_tex					*load_png(char *path);
+void 					print_png_file(t_tex *t);
 
 
 //intersection
 
-void			inter(t_env *e);
-void			plan_inter(t_env *e);
-void			sphere_inter(t_env *e);
-void			wave_inter(t_env *e);
-void			biwave_inter(t_env *e);
+void					inter(t_env *e);
+void					plan_inter(t_env *e);
+void					sphere_inter(t_env *e);
+void					wave_inter(t_env *e);
+void					biwave_inter(t_env *e);
 
 //render
 
-void	ray_set(t_cam *c, int i);
-void	move_cam(t_env *e);
-void	rt(t_env *e);
-void 	update_dash(t_env *e);
+void					ray_set(t_cam *c, int i);
+void					move_cam(t_env *e);
+void					rt(t_env *e);
+void				 	update_dash(t_env *e);
 
 //mlx_stuff
 
-t_env	*env_init(char *path);
-int	expose(t_env *e);
-int	key_press(int keycode, t_env *e);
-int	key(int keycode, t_env *e);
-int	loop_hook(t_env *e);
-void	loop(t_env *e);
+t_env					*env_init(char *path);
+int						expose(t_env *e);
+int						key_press(int keycode, t_env *e);
+int						key(int keycode, t_env *e);
+int						loop_hook(t_env *e);
+void					loop(t_env *e);
 
 #endif

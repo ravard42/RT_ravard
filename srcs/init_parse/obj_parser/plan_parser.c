@@ -53,6 +53,7 @@ void	plan_parser(t_env *e, xmlNodePtr noeud)
 	}
 	e->o->name = "plan";
 	e->o->t = NULL;
+	e->o->spot = 0;
 	load_plan(e, noeud);
 	e->o->next = NULL;
 	//if (e->o->t)
