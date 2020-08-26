@@ -43,7 +43,7 @@ static float		g(float k, float *param)
 **	8 : rz
 */
 
-void				biOndePlane_inter(t_env *e)
+void				biwave_inter(t_env *e)
 {
 	float	i;
 	float	k;

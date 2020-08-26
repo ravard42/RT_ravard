@@ -16,7 +16,7 @@ static void	load_sphere(t_env *e, xmlNodePtr noeud)
 	
 }
 
-void	sphere_set(t_env *e, xmlNodePtr noeud)
+void	sphere_parser(t_env *e, xmlNodePtr noeud)
 {
 	t_obj	*begin;
 

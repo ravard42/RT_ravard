@@ -31,7 +31,7 @@ static int	key_switch(int	keycode)
 
 int	expose(t_env *e)
 {
-	cam_set(e);
+	move_cam(e);
 	rt(e);
 //	exit(0);
 	mlx_put_image_to_window(e->ptr, e->win, e->img[0], 0, 0);

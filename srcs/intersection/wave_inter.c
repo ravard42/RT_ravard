@@ -91,7 +91,7 @@ static float		g(float k, float *param)
 */
 
 
-void				ondePlane_inter(t_env *e)
+void				wave_inter(t_env *e)
 {
 	float	i;
 	float	k;

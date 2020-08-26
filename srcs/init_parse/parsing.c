@@ -18,15 +18,15 @@ void	parse(t_env *e, char *path)
 	while (noeud)
 	{
 		if (!ft_strcmp((const char *)noeud->name, "cam"))
-			cam_init(e, noeud);
+			cam_parser(e, noeud);
 		else if (!ft_strcmp((const char *)noeud->name, "plan"))
-			plan_set(e, noeud);
+			plan_parser(e, noeud);
 		else if (!ft_strcmp((const char *)noeud->name, "sphere"))
-			sphere_set(e, noeud);
-		else if (!ft_strcmp((const char *)noeud->name, "ondePlane"))
-			ondePlane_set(e, noeud);
-		else if (!ft_strcmp((const char *)noeud->name, "biOndePlane"))
-			biOndePlane_set(e, noeud);
+			sphere_parser(e, noeud);
+		else if (!ft_strcmp((const char *)noeud->name, "wave"))
+			wave_parser(e, noeud);
+		else if (!ft_strcmp((const char *)noeud->name, "biwave"))
+			biwave_parser(e, noeud);
 		noeud = noeud->next;
 	}
 	xmlFreeDoc(doc);

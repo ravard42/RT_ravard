@@ -45,7 +45,7 @@ static void	cam_shift(t_env *e)
 		vect_sub(e->c.ori, e->c.ori, vect_multi(tmp, e->move[12] * PAS, e->c.base[1]));
 }
 
-void	cam_set(t_env *e)
+void	move_cam(t_env *e)
 {
 	cam_shift(e);
 	cam_rot(e);

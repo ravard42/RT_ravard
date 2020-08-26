@@ -14,6 +14,12 @@ static void	load_plan(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"col");
 	load_vect(e->o->col, (char *)attr);
 	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"xlim");
+	load_vect(e->o->xlim, (char *)attr);
+	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"ylim");
+	load_vect(e->o->ylim, (char *)attr);
+	xmlFree(attr);
 	if ((noeud = noeud->children) != NULL && !ft_strcmp((const char *)noeud->name, "texture"))
 	{
 		attr = xmlGetProp(noeud, (const xmlChar *)"path");
@@ -28,7 +34,7 @@ static void	load_plan(t_env *e, xmlNodePtr noeud)
 	}
 }
 
-void	plan_set(t_env *e, xmlNodePtr noeud)
+void	plan_parser(t_env *e, xmlNodePtr noeud)
 {
 	t_obj		*begin;
 

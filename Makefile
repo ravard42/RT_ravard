@@ -3,21 +3,21 @@ NAME = RT
 FLAGS = -Wall -Wextra -O2
 #FLAGS = -Wall -Wextra -g -fsanitize=address
 SRC = srcs/main.c\
-	srcs/init/env_init.c\
-	srcs/init/parsing/parsing.c\
-	srcs/init/parsing/tools.c\
-	srcs/init/parsing/setting/cam_init.c\
-	srcs/init/parsing/setting/cam_set.c\
-	srcs/init/parsing/setting/plan_set.c\
-	srcs/init/parsing/setting/sphere_set.c\
-	srcs/init/parsing/setting/ondePlane_set.c\
-	srcs/init/parsing/setting/biOndePlane_set.c\
+	srcs/init_parse/env_init.c\
+	srcs/init_parse/parsing.c\
+	srcs/init_parse/tools.c\
+	srcs/init_parse/obj_parser/cam_parser.c\
+	srcs/init_parse/obj_parser/plan_parser.c\
+	srcs/init_parse/obj_parser/sphere_parser.c\
+	srcs/init_parse/obj_parser/wave_parser.c\
+	srcs/init_parse/obj_parser/biwave_parser.c\
 	srcs/texture/load_png.c\
 	srcs/intersection/inter.c\
 	srcs/intersection/plan_inter.c\
 	srcs/intersection/sphere_inter.c\
-	srcs/intersection/ondePlane_inter.c\
-	srcs/intersection/biOndePlane_inter.c\
+	srcs/intersection/wave_inter.c\
+	srcs/intersection/biwave_inter.c\
+	srcs/render/move_cam.c\
 	srcs/render/rt.c\
 	srcs/render/dashboard.c\
 	srcs/mlx_stuff/hook_func.c\

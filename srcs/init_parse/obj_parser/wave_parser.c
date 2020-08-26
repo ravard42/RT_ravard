@@ -1,6 +1,6 @@
 #include <rt.h>
 
-static void	load_biOndePlane(t_env *e, xmlNodePtr noeud)
+static void	load_wave(t_env *e, xmlNodePtr noeud)
 {
 	xmlChar		*attr;
 	
@@ -22,9 +22,11 @@ static void	load_biOndePlane(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"spec");
 	load_vect(&e->o->spec, (char *)attr);
 	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"dir");
+	e->o->dir = ((char *)attr)[0];
 }
 
-void	biOndePlane_set(t_env *e, xmlNodePtr noeud)
+void	wave_parser(t_env *e, xmlNodePtr noeud)
 {
 	t_obj	*begin;
 
@@ -41,8 +43,8 @@ void	biOndePlane_set(t_env *e, xmlNodePtr noeud)
 		e->o->next = (t_obj *)malloc(sizeof(t_obj));
 		e->o = e->o->next;
 	}
-	e->o->name = "biOndePlane";
-	load_biOndePlane(e, noeud);
+	e->o->name = "wave";
+	load_wave(e, noeud);
 	e->o->next = NULL;
 	e->o = begin;
 }

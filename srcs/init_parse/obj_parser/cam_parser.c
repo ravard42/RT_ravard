@@ -19,7 +19,7 @@ static void	cam_init_base(t_cam *c)
 	vect_prod(c->base[1], c->base[2], c->base[0]);
 }
 
-void		cam_init(t_env *e, xmlNodePtr noeud)
+void		cam_parser(t_env *e, xmlNodePtr noeud)
 {
 	int		i;
 	xmlChar		*attr;

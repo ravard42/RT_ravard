@@ -118,18 +118,17 @@ float	*mat_prod(float *mp, float **mat, float *src);
 int	rot(float *ez, float value, float *n);
 float	**inverse(float **mat);
 
-//parsing
+//init_parse
+void 	init_dash(t_env *e);
 void	parse(t_env *e, char *path);
 float	*load_vect(float *a, char *s);
 
-//setting
-void	cam_init(t_env *e, xmlNodePtr noeud);
-void	ray_set(t_cam *c, int i);
-void	cam_set(t_env *e);
-void	plan_set(t_env *e, xmlNodePtr noeud);
-void	sphere_set(t_env *e, xmlNodePtr noeud);
-void    ondePlane_set(t_env *e, xmlNodePtr noeud);
-void    biOndePlane_set(t_env *e, xmlNodePtr noeud);
+//obj_parser
+void	cam_parser(t_env *e, xmlNodePtr noeud);
+void	plan_parser(t_env *e, xmlNodePtr noeud);
+void	sphere_parser(t_env *e, xmlNodePtr noeud);
+void    wave_parser(t_env *e, xmlNodePtr noeud);
+void    biwave_parser(t_env *e, xmlNodePtr noeud);
 
 //textures
 t_tex		*load_png(char *path);
@@ -141,18 +140,19 @@ void 		print_png_file(t_tex *t);
 void			inter(t_env *e);
 void			plan_inter(t_env *e);
 void			sphere_inter(t_env *e);
-void			ondePlane_inter(t_env *e);
-void			biOndePlane_inter(t_env *e);
+void			wave_inter(t_env *e);
+void			biwave_inter(t_env *e);
 
-//pixel
+//render
 
+void	ray_set(t_cam *c, int i);
+void	move_cam(t_env *e);
 void	rt(t_env *e);
+void 	update_dash(t_env *e);
 
 //mlx_stuff
 
 t_env	*env_init(char *path);
-void init_dash(t_env *e);
-void update_dash(t_env *e);
 int	expose(t_env *e);
 int	key_press(int keycode, t_env *e);
 int	key(int keycode, t_env *e);
