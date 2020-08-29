@@ -20,6 +20,14 @@ static void	load_plan(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"ylim");
 	load_vect(e->o->ylim, (char *)attr);
 	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"spot");
+	e->o->spot = attr ? 1 : 0;	
+	xmlFree(attr);
+	if ((attr = xmlGetProp(noeud, (const xmlChar *)"move_coord")))
+	{
+		e->o->move = ft_atoi((char *)attr);
+		xmlFree(attr);
+	}
 	if ((noeud = noeud->children) != NULL && !ft_strcmp((const char *)noeud->name, "texture"))
 	{
 		attr = xmlGetProp(noeud, (const xmlChar *)"path");
@@ -51,9 +59,9 @@ void	plan_parser(t_env *e, xmlNodePtr noeud)
 		e->o->next = (t_obj *)malloc(sizeof(t_obj));
 		e->o = e->o->next;
 	}
-	e->o->name = "plan";
+	e->o->type = PLAN;
 	e->o->t = NULL;
-	e->o->spot = 0;
+	e->o->move = -1;
 	load_plan(e, noeud);
 	e->o->next = NULL;
 	//if (e->o->t)

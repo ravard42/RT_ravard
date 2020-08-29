@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<scene ambiente="{0.3}">
-	<cam ori="{12,-30,20}" axe="{0,1,-0.5}"></cam>
-	<sphere ori="{5,5,5}" rad="0.5" col="{255,255,0}" spot=""></sphere>
-	<light ori="{5,5,5}"></light>
-	<wave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,30}" ylim="{0,30}"></wave>
-	<sphere ori="{0,0,0}" rad="0.1" col="{255,255,255}"></sphere>
-	<sphere ori="{1,0,0}" rad="0.1" col="{255,0,0}"></sphere>
-	<sphere ori="{0,1,0}" rad="0.1" col="{0,255,0}"></sphere>
-	<sphere ori="{0,0,1}" rad="0.1" col="{0,0,255}"></sphere>
+<scene ambiente="{0.1}">
+	<cam ori="{10,10,30}" axe="{0,0,-1}"></cam>
+	<sphere ori="{0,0,5,10,10,10,0.01}" move_coord="0" rad="0.5" col="{255,255,0}" spot=""></sphere>
+	<light ori="{0,0,5,10,10,10,0.01}" move_coord="0"></light>
+	<plan ori="{0,0,0,0,2.05,0.06}" move_coord="1" axe="{0,0,1}" col="{255,0,255}" xlim="{0,20}" ylim="{0,20}"></plan>
+	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0,0}" xlim="{0,20}" ylim="{0,20}"></biwave>
+	<sphere ori="{0,0,0}" rad="0.1" col="{255,255,255}" spot=""></sphere>
+	<sphere ori="{1,0,0}" rad="0.1" col="{255,0,0}" spot=""></sphere>
+	<sphere ori="{0,1,0}" rad="0.1" col="{0,255,0}" spot=""></sphere>
+	<sphere ori="{0,0,1}" rad="0.1" col="{0,0,255}" spot=""></sphere>
 </scene>
 
 
 <!--
-	<biwave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,15}" ylim="{0,15}"></biwave>
+	srcs/move_coord/move_coord.c
+	rot_z 			-> {xt, yt, zo, xo, yo, r, f}
+ 	cycleTrans_z 	-> {xo, yo, zt, zo, r, f}
+ 	wave_t 			-> {A, ω, φ(t), φ(0), Δφ}
+
+	<biwave ori="{0,0,0}" move_coord="2" col="{0,255,255}" onde="{1,0.2,0,0,0.10}" xlim="{0,20}" ylim="{0,20}"></biwave>
+	<cam ori="{12,-30,20}" axe="{0,1,-0.5}"></cam>
+	<wave ori="{0,0,0}" col="{0,255,255}" onde="{1,0.2,0}" xlim="{0,30}" ylim="{0,30}"></wave>
 	<plan ori="{0,0,-1}" axe="{0,0,1}" col="{255,0,255}" xlim="{0,10}" ylim="{0,10}"></plan>
 	<plan ori="{1,1,0.62}" axe="{0.49,0.49,0.41}" col="{255,0,255}" xlim="{0,10}" ylim="{0,10}"></plan>
 -->

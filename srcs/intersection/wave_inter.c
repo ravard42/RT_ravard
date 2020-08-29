@@ -1,9 +1,9 @@
 #include "rt.h"
 
 #define COND_0 (e->c.ori[2] > e->o->onde[0] && e->c.ray[2] < 0)
-#define DK			0.1
-#define TOL			0.1
-#define ITER_MAX	1000
+#define DK_0			0.1
+#define TOL_0			0.1
+#define ITER_MAX_0	1000
 
 /*
 **	unicodes:
@@ -62,13 +62,13 @@
 **		
 **		On sait que g(k_0 - 0.01) n'est pas une solution puisqu'au dessus du plan tangent supérieur
 **		On redéfinit k_0 : k_0 = a-cz/rz - 0.01
-**		Tant que |g(k_i)| ne passe pas sous la valeur de TOL on calcule g(k_i+1) où k_i+1 = k_i + DK
+**		Tant que |g(k_i)| ne passe pas sous la valeur de TOL_0 on calcule g(k_i+1) où k_i+1 = k_i + DK_0
 **		Cela a du sens de par la continuité de g!
 **		Une fois qu'on a une solution approximative on calcule les coordonnées de M=C + k * vR
 **		et on voit si cette solution est acceptable relativement à xlim et ylim.
 **		Si oui c'est fini sinon pas de solution
 **
-**		NB: jouer avec les valeurs de TOL et DK pour obtenir un bon rapport render/compute_time
+**		NB: jouer avec les valeurs de TOL_0 et DK_0 pour obtenir un bon rapport render/compute_time
 **
 **
 */
@@ -110,8 +110,8 @@ void				wave_inter(t_env *e)
 		param[4] = e->c.ori[2];
 		param[5] = e->c.ray[0];
 		param[6] = e->c.ray[2];
-		while (fabs(g(k, param)) > TOL && ++i < ITER_MAX)
-			k += DK;
+		while (fabs(g(k, param)) > TOL_0 && ++i < ITER_MAX_0)
+			k += DK_0;
 		inter_x = e->c.ori[0] + k * e->c.ray[0];
 		inter_y = e->c.ori[1] + k * e->c.ray[1];
 		if (k <= e->c.inter

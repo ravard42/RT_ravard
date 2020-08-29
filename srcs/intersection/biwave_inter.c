@@ -1,9 +1,9 @@
 #include "rt.h"
 
-#define COND_0 (e->c.ori[2] > 2 * e->o->onde[0] && e->c.ray[2] < 0)
-#define DK			0.1
-#define TOL			0.1
-#define ITER_MAX	1000
+#define COND_1 (e->c.ori[2] > 2 * e->o->onde[0] && e->c.ray[2] < 0)
+#define DK_1			0.15
+#define TOL_1			0.15
+#define ITER_MAX_1	500
 
 /*
 ** cf ondePlane_inter.c
@@ -51,7 +51,7 @@ void				biwave_inter(t_env *e)
 	float	inter_x;
 	float	inter_y;
 
-	if (COND_0)
+	if (COND_1)
 	{
 		i = -1;
 		k = (2 * e->o->onde[0] - e->c.ori[2]) / e->c.ray[2] - 0.01;
@@ -64,8 +64,8 @@ void				biwave_inter(t_env *e)
 		param[6] = e->c.ray[0];
 		param[7] = e->c.ray[1];
 		param[8] = e->c.ray[2];
-		while (fabs(g(k, param)) > TOL && ++i < ITER_MAX)
-			k += DK;
+		while (fabs(g(k, param)) > TOL_1 && ++i < ITER_MAX_1)
+			k += DK_1;
 		inter_x = e->c.ori[0] + k * e->c.ray[0];
 		inter_y = e->c.ori[1] + k * e->c.ray[1];
 		if (k <= e->c.inter

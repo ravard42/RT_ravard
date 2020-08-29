@@ -16,8 +16,11 @@ static void	load_sphere(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"spot");
 	e->o->spot = attr ? 1 : 0;	
 	xmlFree(attr);
-	
-	
+	if ((attr = xmlGetProp(noeud, (const xmlChar *)"move_coord")))
+	{
+		e->o->move = ft_atoi((char *)attr);
+		xmlFree(attr);
+	}
 }
 
 void	sphere_parser(t_env *e, xmlNodePtr noeud)
@@ -37,7 +40,8 @@ void	sphere_parser(t_env *e, xmlNodePtr noeud)
 		e->o->next = (t_obj *)malloc(sizeof(t_obj));
 		e->o = e->o->next;
 	}
-	e->o->name = "sphere";
+	e->o->type = SPHERE;
+	e->o->move = -1;
 	load_sphere(e, noeud);
 	e->o->next = NULL;
 	e->o = begin;

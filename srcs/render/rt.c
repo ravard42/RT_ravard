@@ -7,28 +7,13 @@ static	void 		clear_cam_pix(t_env *e, int i)
 	e->c.obj = NULL;
 }
 
-static float		*get_normal(float *ret, t_env *e)
-{
-	int		i;
-
-	i = -1;
-	while (normal[++i].prim_name
-		&& ft_strcmp(normal[i].prim_name, e->c.obj->name))
-		;
-	if (normal[i].prim_name)
-		normal[i].prim_normal(ret, e);
-	else
-		vect_set(ret, 0, 0, 0);
-	return (ret);
-}
-
 static int	pix_set(t_env *e)
 {
 	float	diff;
 	float	nor[3];
 	float	ret[3];
 
-	get_normal(nor, e);
+	surf_normal[e->c.obj->type](nor, e);	
 	diff = e->c.obj->spot ? 2 - e->amb : fabs(dot_prod(nor, e->l.ray));
 	vect_multi(ret, (e->amb + diff) / 2, e->c.obj->col);
 	return ((((int)ret[0]) << 16) + (((int)ret[1]) << 8) + ((int)ret[2]));
@@ -70,7 +55,6 @@ void	*render_chunk(void *arg)
 	}
 	return (NULL);
 }
-
 
 static void		write_chunck(t_env *dst, t_env *src, uint8_t id, int n)
 {

@@ -19,6 +19,14 @@ static void	load_biwave(t_env *e, xmlNodePtr noeud)
 	attr = xmlGetProp(noeud, (const xmlChar *)"ylim");
 	load_vect(e->o->ylim, (char *)attr);
 	xmlFree(attr);
+	attr = xmlGetProp(noeud, (const xmlChar *)"spot");
+	e->o->spot = attr ? 1 : 0;	
+	xmlFree(attr);
+	if ((attr = xmlGetProp(noeud, (const xmlChar *)"move_coord")))
+	{
+		e->o->move = ft_atoi((char *)attr);
+		xmlFree(attr);
+	}
 }
 
 void	biwave_parser(t_env *e, xmlNodePtr noeud)
@@ -38,8 +46,8 @@ void	biwave_parser(t_env *e, xmlNodePtr noeud)
 		e->o->next = (t_obj *)malloc(sizeof(t_obj));
 		e->o = e->o->next;
 	}
-	e->o->name = "biwave";
-	e->o->spot = 0;
+	e->o->type = BIWAVE;
+	e->o->move = -1;
 	load_biwave(e, noeud);
 	e->o->next = NULL;
 	e->o = begin;

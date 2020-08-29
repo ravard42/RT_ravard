@@ -1,5 +1,12 @@
 #include "rt.h"
 
+void            (*surf_inter[])(t_env *e) = {
+				plan_inter,
+				sphere_inter,
+				wave_inter,
+				biwave_inter
+};
+
 void			inter(t_env *e)
 {
 	t_obj	*begin;
@@ -7,14 +14,7 @@ void			inter(t_env *e)
 	begin = e->o;
 	while (e->o != NULL)
 	{
-		if (!ft_strcmp("plan", e->o->name))
-			plan_inter(e);
-		else if (!ft_strcmp("sphere", e->o->name))
-			sphere_inter(e);
-		else if (!ft_strcmp("wave", e->o->name))
-			wave_inter(e);
-		else if (!ft_strcmp("biwave", e->o->name))
-			biwave_inter(e);
+		surf_inter[e->o->type](e);
 		e->o = e->o->next;
 	}
 	e->o = begin;

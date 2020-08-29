@@ -13,6 +13,8 @@ SRC = srcs/main.c\
 	srcs/init_parse/obj_parser/wave_parser.c\
 	srcs/init_parse/obj_parser/biwave_parser.c\
 	srcs/texture/load_png.c\
+	srcs/move_coord/move_coord.c\
+	srcs/move_coord/move_map.c\
 	srcs/intersection/inter.c\
 	srcs/intersection/plan_inter.c\
 	srcs/intersection/sphere_inter.c\

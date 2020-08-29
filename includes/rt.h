@@ -11,6 +11,7 @@
 # include <libxml/parser.h>
 # include <png.h>
 # include <pthread.h>
+# include <time.h>
 # include "libft.h"
 
 # define MAX_X_CAM	500
@@ -39,10 +40,15 @@
 # define ONZE		32     // space : up
 # define FAUCON		65505  // shift : speed
 
+# define PLAN		0
+# define SPHERE		1
+# define WAVE		2
+# define BIWAVE		3
+
 
 # define PAS		0.4
 # define MILLENIUM	10
-# define ROT		M_PI / 60
+# define ROT		M_PI / 45
 
 typedef struct s_env	t_env;
 typedef struct s_obj	t_obj;
@@ -78,32 +84,29 @@ typedef struct			s_cam
 
 typedef struct			s_light
 {
-	float				ori[3];
-	float				ray[3]; // normalize vector from light to current intersection point
+	float				ori[7]; // rot_z need 7 coord (cf move_coord directory)
+	float				ray[3]; // 	normalize vector from light to current intersection point
+	int8_t				move;
 }						t_light;
 
-
-typedef struct			s_normal
-{
-	char				*prim_name;
-	float				*(*prim_normal)(float *, t_env *);
-}						t_normal;
-
-extern t_normal			normal[];
+extern void            (*move_coord[])(double time, t_light *, t_obj *);
+extern float			*(*surf_normal[])(float *, t_env *);
+extern void            (*surf_inter[])(t_env *);
 
 typedef struct			s_obj
 {
-	char				*name;
-	float				ori[3];
+	uint8_t				type;
+	float				ori[7]; // rot_z need 7 coord (cf move_coord directory)
 	float				axe[3];
 	float				nor[3]; //normal for Phong lighting model (ambiente, diffuse, specular)
 	float				rad;
 	float				col[3];
-	float				onde[3]; // (amplitude, fréquence, déphasage)
+	float				onde[5]; // (amplitude, fréquence, φ(t), φ(0), Δφ) (cf move_coord directory)
 	float				xlim[2];
 	float				ylim[2];
 	t_tex				*t;
 	bool				spot;
+	int8_t				move; // cf time_func.c
 	t_obj				*next;
 }						t_obj;
 
@@ -116,6 +119,7 @@ typedef struct			s_env
 	void				*img[2]; 		// second image for cam dashboard
 	char				*data_img[2];	// ...
 	float				amb;
+	double				t; 				//time 
 	t_cam				c;
 	t_light				l;
 	t_obj				*o;
@@ -156,6 +160,9 @@ void				    biwave_parser(t_env *e, xmlNodePtr noeud);
 t_tex					*load_png(char *path);
 void 					print_png_file(t_tex *t);
 
+
+//time_func.c
+void					move_map(t_env *e);
 
 //intersection
 
